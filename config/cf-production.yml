@@ -1,5 +1,10 @@
 ---
 applications:
-- name: whiteboard
+- name: corelogic-whiteboard
   command: bundle exec rake db:migrate && bundle exec unicorn -p $PORT -c ./config/unicorn.rb
   path: ../
+  services:
+  - mysql-corelogic-whiteboard
+  - sendgrid
+  env:
+    IP_WHITELIST: 69.87.100.1

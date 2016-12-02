@@ -41,12 +41,11 @@ namespace :cf do
 
     environment = ENVIRONMENT
     cf_target = 'api.run.pivotal.io'
-    deploy_space = 'whiteboard'
-    deploy_org = "pivotallabs"
+    deploy_space = 'production'
+    deploy_org = "corelogic"
 
     check_for_cli
     check_for_dirty_git
-    tag_deploy(environment)
 
     sh "cf api #{cf_target}"
     sh "cf target -o #{deploy_org} -s #{deploy_space}"
