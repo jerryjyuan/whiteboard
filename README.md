@@ -59,8 +59,10 @@ bundle exec rspec
 
 ## How to Deploy to Cloud Foundry
 
+* Edit the [Production manifest](./config/cf-production.yml) if needed before pushing out to PCF
+
 ```
-cf login -a https://api.run.pivotal.io -o corelogic -s production
+cf login -a https://api.run.pivotal.io -o corelogic-org -s production
 rake production deploy
 ```
 
