@@ -42,7 +42,7 @@ namespace :cf do
     environment = ENVIRONMENT
     cf_target = 'api.run.pivotal.io'
     deploy_space = 'production'
-    deploy_org = "corelogic"
+    deploy_org = "corelogic-org"
 
     check_for_cli
     check_for_dirty_git
