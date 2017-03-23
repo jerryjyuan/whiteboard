@@ -59,12 +59,20 @@ bundle exec rspec
 
 ## How to Deploy to Cloud Foundry
 
-* Edit the [Production manifest](./config/cf-production.yml) if needed before pushing out to PCF
+* Edit the [Production manifest](./config/cf-production.yml) if needed to add an outbound office IP address before pushing out to PCF
 
-```
-cf login -a https://api.run.pivotal.io -o corelogic-org -s production
-rake production deploy
-```
+   | Office             | IP Address    |
+   | ---                | ---           |
+   | Oxford, MS         | 198.178.56.27 | 
+   | Rancho Cordova, CA | 69.87.100.1   |
+   | Santa Monica       | 204.93.49.98  |
+
+* Run the below commands to push the application out:
+
+   ```
+   cf login -a https://api.run.pivotal.io -o corelogic-org -s production
+   rake production deploy
+   ```
 
 ## Author
 
