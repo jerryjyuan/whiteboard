@@ -57,7 +57,29 @@ Before running tests, make sure to add your local IP to the IP_WHITELIST environ
 bundle exec rspec
 ```
 
+
 ## How to Deploy to Cloud Foundry
+
+#### Pre-Requisites
+
+In order to deploy this out, you will need to have installed quite a few things
+
+* Install XCode (through the App Store)
+* Install Ruby / `rbenv`
+* Run the below commands:
+
+   ```
+	brew install mysql
+	
+	brew install qt@5.5
+	brew link --force qt55
+	
+	ln -s /usr/local/opt/readline/lib/libreadline.dylib /usr/local/opt/readline/lib/libreadline.6.dylib
+	
+	bundle install	
+   ```
+
+#### Deployment Process
 
 * Edit the [Production manifest](./config/cf-production.yml) if needed to add an outbound office IP address before pushing out to PCF
 
