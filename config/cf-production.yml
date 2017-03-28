@@ -7,4 +7,4 @@ applications:
   - mysql-corelogic-whiteboard
   - sendgrid
   env:
-    IP_WHITELIST: 198.178.56.27,69.87.100.1,204.93.49.98
+    IP_WHITELIST: 198.178.56.26,198.178.56.27,69.87.100.1,204.93.49.98

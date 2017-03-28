@@ -83,11 +83,11 @@ In order to deploy this out, you will need to have installed quite a few things
 
 * Edit the [Production manifest](./config/cf-production.yml) if needed to add an outbound office IP address before pushing out to PCF
 
-   | Office             | IP Address    |
-   | ---                | ---           |
-   | Oxford, MS         | 198.178.56.27 | 
-   | Rancho Cordova, CA | 69.87.100.1   |
-   | Santa Monica       | 204.93.49.98  |
+   | Office             | IP Address                  |
+   | ---                | ---                         |
+   | Oxford, MS         | 198.178.56.26,198.178.56.27 | 
+   | Rancho Cordova, CA | 69.87.100.1                 |
+   | Santa Monica, CA   | 204.93.49.98                |
 
 * Run the below commands to push the application out:
 
