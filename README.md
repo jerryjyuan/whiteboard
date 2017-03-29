@@ -13,10 +13,19 @@ It is deployed at [http://corelogic-whiteboard.cfapps.io](http://corelogic-white
 
 ## Usage
 
-- Deploy to Cloud Foundry
-- Tell people in the office to use it
-- At standup, go over the board, then add a title and click "create post"
-- The board is then cleared for the next day, and you can edit the post at your leisure and deliver it when ready
+- Go to [the office standups homepage](http://corelogic-whiteboard.cfapps.io/standups) to see a list of office standups
+
+   - If your office is missing, you will need to add it by clicking on the "New Standup" button and configure it similar to the other office standups
+    
+       > **Note:** You can see what a configuration looks like by clicking the "Preferences" link in their office standup, similar to [this configuration for the Rancho Cordova office](http://corelogic-whiteboard.cfapps.io/standups/2/edit))
+
+- Before the daily standup, go to the board and add an entry in either the "New Faces", "Helps", "Interestings", or "Events" section
+   
+- At standup, go over the board and click the "Presentation" button
+   
+   - You can use the right/left arrow keys to navigate through the presentation
+
+- After standup, the host(s) for the day should enter their name(s) and a brief subject in the "Send Standup Email" section and click the "Send Email" button in order to publish that day's standup email to their office distribution list
 
 ## Development
 
@@ -28,7 +37,7 @@ Feel free to check out the original repository for Pivotal's latest changes [her
 
 Since this application was built for Pivotal's internal use, they have it configured to communicate with Okta to login to the application.
 
-None of the CoreLogic employees have access to this, so we have to use a workaround which is to allow **unauthenticated** access from the *outbound* IP addresses of each of the CoreLogic Labs offices.
+None of the CoreLogic employees have access to this, so our workaround is to allow **unauthenticated** access from the *outbound* IP addresses of each of the CoreLogic Labs offices.
 
 The below list is the latest configuration:
 
@@ -56,6 +65,10 @@ If a new IP address needs to be added, you can update the application by going t
    ```
    
 ## Deploying to Cloud Foundry
+
+> **IMPORTANT**
+> 
+> This application is currently deployed to Production, and is quite difficult to build/deploy, so this section is mostly here as a historical reference.
 
 In order to deploy this, you will need to have installed quite a few things
 
