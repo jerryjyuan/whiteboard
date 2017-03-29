@@ -1,71 +1,66 @@
 # Whiteboard
 
-## Overview
+At CoreLogic Labs, we have an office-wide standup every morning at 9:06am (right after breakfast)
 
-Whiteboard is an app which aims to increase the effectiveness of office-wide standups, and increase communication with the technical community by sharing what we learn with the outside world.  It does this by making two things easy - emailing a summary of the standup to everyone in the company and by creating a blog post of the items which are deemed of public interest.
+The current format is:
 
-## Background
+- *New faces*: who's new in the office
+- *Helps*: things people are stuck on
+- *Interestings*: things that might be of interest to the office
+- *Events*: things going on that day, both in the office and in the local community
 
-At Pivotal Labs we have an office-wide standup every morning at 9:06 (right after breakfast). The current format is new faces (who's new in the office), helps (things people are stuck on) and interestings (things that might be of interest to the office).
-
-Before Whiteboard, one person madly scribbled notes, and one person ran standup using a physical whiteboard as a guide to things people wanted to remember to talk about.  Whiteboard provides an easy interface for people to add items they want to talk about, and then a way to take those items and assemble them into a blog post and an email with as little effort as possible.  The idea is to shift the writing to the person who knows about the item, and reduce the role of the person running standup to an editor.
-
-## Features
-
-- Add New Faces, Helps and Interesting
-- Summarize into posts
-- Two click email sending (the second click is for safety)
-- Two click Posts to Wordpress (untransformed markdown at the moment)
-- Allow authorized IP addresses to access boards without restriction
-- Allows users to sign in using Okta if their IP is not Whitelisted
+It is deployed at [http://corelogic-whiteboard.cfapps.io](http://corelogic-whiteboard.cfapps.io)
 
 ## Usage
 
-- Deploy to Cloud Foundry.
-- Tell people in the office to use it. 
-- At standup, go over the board, then add a title and click 'create post'.
-- The board is then cleared for the next day, and you can edit the post at your leisure and deliver it when ready.
+- Deploy to Cloud Foundry
+- Tell people in the office to use it
+- At standup, go over the board, then add a title and click "create post"
+- The board is then cleared for the next day, and you can edit the post at your leisure and deliver it when ready
 
 ## Development
 
-Whiteboard is a Rails 4 app. It uses rspec with capybara for request specs.  Please add tests if you are adding code.
+For CoreLogic's use, we aren't actively developing the Whiteboard application, we just use it.
 
-Whiteboard feature tests are incompatible with Qt 5.5, ensure you have a lower version installed before running `bundle`
+Feel free to check out the original repository for Pivotal's latest changes [here](https://github.com/pivotal/whiteboard)
 
-Whiteboard [is on Pivotal Tracker](https://www.pivotaltracker.com/projects/560741).
+## The IP Address Whitelist
 
-A string including all the IPs used by your office is required as an environment variable in order for IP fencing to work.
+Since this application was built for Pivotal's internal use, they have it configured to communicate with Okta to login to the application.
 
-The format should be a single string of IPs, e.g. `192.168.0.1` or IP ranges in slash notation, e.g. `64.168.236.220/24` separated by a single comma like so: 
+None of the CoreLogic employees have access to this, so we have to use a workaround which is to allow **unauthenticated** access from the *outbound* IP addresses of each of the CoreLogic Labs offices.
 
-```
-192.168.1.1,127.0.0.1,10.10.10.10,33.33.33.33/24
-```
+The below list is the latest configuration:
 
-Export this string:
-```
-export IP_WHITELIST=<ip_string>
-```
+| Office             | IP Address                   |
+| ---                | ---                          |
+| Oxford, MS         | 198.178.56.26, 198.178.56.27 | 
+| Rancho Cordova, CA | 69.87.100.1                  |
+| Santa Monica, CA   | 204.93.49.98                 |
 
-Whiteboard is setup by default to whitelist 127.0.0.1 (localhost) by default to allow the tests to pass. This is located in the .env.test file.
-
-## Testing
-
-Before running tests, make sure to add your local IP to the IP_WHITELIST environment variable string. Then run
-
-```
-bundle exec rspec
-```
+These values should match what is in the [Production manifest](./config/cf-production.yml).
 
 
-## How to Deploy to Cloud Foundry
+### Updating the IP Address Whitelist
 
-#### Pre-Requisites
+If a new IP address needs to be added, you can update the application by going through the below steps:
 
-In order to deploy this out, you will need to have installed quite a few things
+* Update this README with that office's name and IP address in the list above
+* Update the [Production manifest](./config/cf-production.yml) with a comma delimited entry of the new IP address
+* Execute the below commands to update the application in PCF:
 
+   ```
+   cf login -a https://api.run.pivotal.io -o corelogic-org -s production
+   cf set-env corelogic-whiteboard IP_WHITELIST <addresses-from-manifest>
+   cf restage corelogic-whiteboard
+   ```
+   
+## Deploying to Cloud Foundry
+
+In order to deploy this, you will need to have installed quite a few things
+
+* Go through the [Pivotal developer workstation setup](https://github.com/pivotal/workstation-setup)
 * Install XCode (through the App Store)
-* Install Ruby / `rbenv`
 * Run the below commands:
 
    ```
@@ -78,28 +73,9 @@ In order to deploy this out, you will need to have installed quite a few things
 	
 	bundle install	
    ```
-
-#### Deployment Process
-
-* Edit the [Production manifest](./config/cf-production.yml) if needed to add an outbound office IP address before pushing out to PCF
-
-   | Office             | IP Address                  |
-   | ---                | ---                         |
-   | Oxford, MS         | 198.178.56.26,198.178.56.27 | 
-   | Rancho Cordova, CA | 69.87.100.1                 |
-   | Santa Monica, CA   | 204.93.49.98                |
-
 * Run the below commands to push the application out:
 
    ```
    cf login -a https://api.run.pivotal.io -o corelogic-org -s production
    rake production deploy
    ```
-
-## Author
-
-Whiteboard was written by [Matthew Kocher](https://github.com/mkocher).
-
-## License
-
-Whiteboard is MIT Licensed. See MIT-LICENSE for details.
