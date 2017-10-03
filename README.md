@@ -41,11 +41,11 @@ None of the CoreLogic employees have access to this, so our workaround is to all
 
 The below list is the latest configuration:
 
-| Office             | IP Address                   |
-| ---                | ---                          |
-| Oxford, MS         | 198.178.56.26, 198.178.56.27 | 
-| Rancho Cordova, CA | 69.87.100.1                  |
-| Santa Monica, CA   | 204.93.49.98                 |
+| Office             | IP Address                                |
+| ---                | ---                                       |
+| Oxford, MS         | 198.178.56.26, 198.178.56.27, 69.87.112.1 | 
+| Rancho Cordova, CA | 69.87.100.1                               |
+| Santa Monica, CA   | 204.93.49.98                              |
 
 These values should match what is in the [Production manifest](./config/cf-production.yml).
 
